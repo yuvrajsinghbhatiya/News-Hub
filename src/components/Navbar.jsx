@@ -1,9 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { auth } from '../firebase'; 
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/');
+
+  };
 
   return (
     <nav className="bg-primary p-4 sm:p-8">
@@ -15,31 +25,28 @@ const Navbar = () => {
           News <span className="text-accent">Hub</span>
         </Link>
 
-          {
-            isAuthenticated && (
-              <Link
-                to="/favorites"
-                className="border-2 border-secondary text-secondary hover:bg-accent hover:text-primary hover:border-none font-semibold py-2 px-4 rounded ml-auto mr-8"
-              >
-                Favorites
-              </Link>
-            )
-          }
-
-        {isAuthenticated ? (
-          <button
-            className="bg-accent hover:bg-accent-dark text-primary font-semibold py-2 px-4 rounded"
-            onClick={() => logout({ returnTo: window.location.origin })}
-          >
-            Logout
-          </button>
+        { localStorage.getItem('token') ? (
+          <>
+            <Link
+              to="/favorites"
+              className="border-2 border-secondary text-secondary hover:bg-accent hover:text-primary hover:border-none font-semibold py-2 px-4 rounded ml-auto mr-8"
+            >
+              Favorites
+            </Link>
+            <button
+              className="bg-accent hover:bg-accent-dark text-primary font-semibold py-2 px-4 rounded"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </>
         ) : (
-          <button
+          <Link
+            to="/login"
             className="bg-accent hover:bg-accent-dark text-primary font-semibold py-2 px-4 rounded"
-            onClick={() => loginWithRedirect()}
           >
             Login
-          </button>
+          </Link>
         )}
       </div>
     </nav>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 function Home({ categories, topHeadlines }) {
   const categoryImageUrls = [
@@ -17,6 +17,18 @@ function Home({ categories, topHeadlines }) {
 
   const topHeadlinesTop = topHeadlines.slice(0, 4);
   const topHeadlinesBottom = topHeadlines.slice(4, 8);
+
+  const [favoriteArticles, setFavoriteArticles] = useState([]);
+  const toggleFavorite = (index) => {
+    const updatedFavoriteArticles = [...favoriteArticles];
+    if (updatedFavoriteArticles.includes(index)) {
+      const indexToRemove = updatedFavoriteArticles.indexOf(index);
+      updatedFavoriteArticles.splice(indexToRemove, 1);
+    } else {
+      updatedFavoriteArticles.push(index);
+    }
+    setFavoriteArticles(updatedFavoriteArticles);
+  };
 
   const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
 
@@ -73,12 +85,12 @@ function Home({ categories, topHeadlines }) {
           <Link to={`/category/${category}`}>
             <div
               key={index}
-              className="h-40 sm:h-48 md:h-60 bg-cover bg-center relative rounded"
+              className="h-40 sm:h-48 md:h-60 bg-cover bg-center relative rounded-lg"
               style={{
                 backgroundImage: `url(${visibleCategoryImageUrls[index]})`,
               }}
             >
-              <div className="absolute inset-0 bg-black opacity-60 rounded"></div>
+              <div className="inset-0 bg-black opacity-50 absolute rounded-lg"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <Link
                   to={`/category/${category}`}
@@ -110,11 +122,10 @@ function Home({ categories, topHeadlines }) {
                   alt="Article"
                   className="w-full h-40 object-cover"
                 />
-                <div className="absolute inset-0 bg-black opacity-60 rounded"></div>
               </div>
 
               {/* Right side: Details */}
-              <div className="flex flex-col w-full sm:w-2/3 p-6 sm:p-4 gap-5 relative">
+              <div className="flex flex-col w-full  p-6 sm:p-4 gap-5 relative">
                 <h3 className="text-xl font-bold mb-2">
                   {article.title || `Category ${index + 1}`}
                 </h3>
@@ -154,7 +165,6 @@ function Home({ categories, topHeadlines }) {
                     })`,
                   }}
                 >
-                  <div className="absolute inset-0 bg-black opacity-60 rounded"></div>
                 </div>
 
                 {/* Right side: Details */}

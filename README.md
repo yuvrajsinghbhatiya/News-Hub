@@ -47,9 +47,4 @@ built using Vite , a popular and powerful JavaScript library for building user i
     npm run dev
 
 
-## Hosted Url- 
-
-   ```
-   
-   ```
 

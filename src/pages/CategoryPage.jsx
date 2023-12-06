@@ -86,7 +86,7 @@ function CategoryPage({ categories }) {
             >
               {/* Image (on top for small screens, on the left for larger screens) */}
               <div className="w-full sm:w-1/3 mb-4 sm:mb-0">
-                <Link to={`/article/${index}`}>
+                <Link >
                   <img
                     src={article.urlToImage}
                     alt={article.title}

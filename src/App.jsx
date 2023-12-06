@@ -5,7 +5,10 @@ import Navbar from './components/Navbar';
 import axios from 'axios';
 import Footer from './components/Footer';
 import CategoryPage from './pages/CategoryPage';
-import NewsDetail from './pages/NewsDetail'; 
+import Register from "./components/Register";
+import Login from "./components/Login";
+
+
 
 function App() {
   const [news, setNews] = useState([]);
@@ -13,6 +16,9 @@ function App() {
   const [topHeadlines, setTopHeadlines] = useState([]);
 
   useEffect(() => {
+
+  
+
     const fetchNews = async () => {
       try {
         const response = await axios.get('https://newsapi.org/v2/top-headlines/sources?apiKey=0e9aac360e1d4865a1412e4a7c2a10a3');
@@ -38,15 +44,18 @@ function App() {
 
     fetchNews();
     fetchTopHeadlines();
+
   }, []);
+
 
   return (
     <Router>
-      <Navbar />
-      <Routes>
+      <Navbar/>
+      <Routes>     
         <Route path="/" element={<Home categories={categories} topHeadlines={topHeadlines} />} />
         <Route path="/category/:categoryName" element={<CategoryPage topHeadlines={topHeadlines} categories={categories} />} />
-        <Route path="/article/:articleId" element={<NewsDetail />} /> 
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <br />
       <Footer />
