@@ -10,7 +10,7 @@ function NewsDetail() {
     const fetchArticle = async () => {
       try {
         const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=us&apiKey=9c42440d595145f986d3701de15fee0d`
+          `https://newsapi.org/v2/top-headlines?country=us&apiKey=0e9aac360e1d4865a1412e4a7c2a10a3`
         );
         const selectedArticle = response.data.articles[articleId];
         setArticle(selectedArticle);

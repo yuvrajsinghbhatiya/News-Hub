@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get('https://newsapi.org/v2/top-headlines/sources?apiKey=9c42440d595145f986d3701de15fee0d');
+        const response = await axios.get('https://newsapi.org/v2/top-headlines/sources?apiKey=0e9aac360e1d4865a1412e4a7c2a10a3');
         setNews(response.data.sources);
 
         const uniqueCategories = [...new Set(response.data.sources.map(source => source.category))];
@@ -29,7 +29,7 @@ function App() {
 
     const fetchTopHeadlines = async () => {
       try {
-        const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=9c42440d595145f986d3701de15fee0d');
+        const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=0e9aac360e1d4865a1412e4a7c2a10a3');
         setTopHeadlines(response.data.articles);
       } catch (error) {
         console.error('Error fetching top headlines:', error);
