@@ -16,7 +16,7 @@ built using Vite , a popular and powerful JavaScript library for building user i
 
 ## Key Features
 
-- **Responsive Design**: SHOPSEE is designed to provide a consistent and user-friendly experience across various devices and screen sizes.
+- **Responsive Design**: NEWSHUB is designed to provide a consistent and user-friendly experience across various devices and screen sizes.
 
 - **API Integration**: We have integrated reliable APIs to ensure that product information is always up-to-date, offering users the latest products and prices.
 
